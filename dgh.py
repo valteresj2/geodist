@@ -53,8 +53,8 @@ class dist_geo_haversine(object):
         if self.dt_comp is not None:
             self.dt_comp=self.dt_comp.reset_index(drop=True)
             for i in tqdm(range(n)):
-                index1=np.where(abs(self.dt_ref.loc[i,self.n_lat]-self.dt_comp[self.n_long].values)<lat_fil)[0]
-                dist=haversine_np(np.array(self.dt_ref.loc[i,self.n_lat]),np.array(self.dt_ref.loc[i,self.n_long]),self.dt_comp.loc[index1,self.n_lat].values,self.dt_comp.loc[index1,self.n_long].values)
+                index1=np.where(abs(self.dt_ref.loc[i,self.n_lat]-self.dt_comp[self.n_lat].values)<lat_fil)[0]
+                dist=haversine_np(np.array(self.dt_ref.loc[i,self.n_long]),np.array(self.dt_ref.loc[i,self.n_lat]),self.dt_comp.loc[index1,self.n_long].values,self.dt_comp.loc[index1,self.n_lat].values)
                 index=np.where(dist<self.km)[0]
                 index1=list(index1[index])
                 if self.func is not None:   
@@ -82,7 +82,7 @@ class dist_geo_haversine(object):
         else:
             for i in tqdm(range(n)):
                 index1=np.where(abs(self.dt_ref.loc[i,self.n_lat]-self.dt_ref[self.n_lat].values)<lat_fil)[0]
-                dist=haversine_np(np.array(self.dt_ref.loc[i,self.n_lat]),np.array(self.dt_ref.loc[i,self.n_long]),self.dt_ref.loc[index1,self.n_lat].values,self.dt_ref.loc[index1,self.n_long].values)
+                dist=haversine_np(np.array(self.dt_ref.loc[i,self.n_long]),np.array(self.dt_ref.loc[i,self.n_lat]),self.dt_comp.loc[index1,self.n_long].values,self.dt_comp.loc[index1,self.n_lat].values)
                 index=np.where(dist<self.km)[0]
                 index1=list(index1[index])
                 index1.remove(i)
